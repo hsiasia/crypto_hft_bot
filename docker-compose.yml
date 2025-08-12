@@ -1,0 +1,12 @@
+version: "3.9" # Compose.yml version
+
+services: 
+  usdc-hft-bot-dev: 
+    build: # build image by hand
+      context: . # current folder as build context of image
+      dockerfile: Dockerfiles/dev 
+    container_name: usdc-hft-bot-dev 
+    volumes: 
+      - .:/workspace # mount current folder into container(/workspace)
+    command: sleep infinity # keep container alive
+    tty: true # make terminal easy to use

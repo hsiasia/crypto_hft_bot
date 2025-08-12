@@ -1,0 +1,19 @@
+### prod/Dockerfile
+FROM debian:bookworm
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    libssl-dev \
+    libboost-all-dev \
+    libwebsocketpp-dev \
+    nlohmann-json-dev \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy built binary (assumes build is done externally)
+COPY build/usdc_hft_bot /app/usdc_hft_bot
+
+# Set workdir
+WORKDIR /app
+
+# Run the bot
+CMD ["./usdc_hft_bot"]
